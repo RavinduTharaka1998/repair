@@ -5,8 +5,8 @@ import axios from 'axios';
 
 export default  class UpdateRepair extends  Component{
 
-
     constructor(props){
+        
         super(props);
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeItemName = this.onChangeItemName.bind(this);
@@ -14,7 +14,7 @@ export default  class UpdateRepair extends  Component{
         this.onChangeEstimatedCost = this.onChangeEstimatedCost.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onSubmitgetDetails = this.onSubmitgetDetails.bind(this);
+        
 
         this.state = {
             id:'',
@@ -22,13 +22,14 @@ export default  class UpdateRepair extends  Component{
             RepairPeriod: '',
             EstimatedCost:'',
             Description:'',
-            state: ''
+            status:''
         }
        
     }
     
     onSubmitgetDetails(e) {
         e.preventDefault();
+        alert("your Id : ");
         axios.get('http://localhost:4000/repair/editRepair/'+this.state.id)
             .then(res => {
                 this.setState({
@@ -42,7 +43,7 @@ export default  class UpdateRepair extends  Component{
                 console.log("Can't Get Data");
             })
     }
-
+    
     onChangeId(e){
         this.setState( {
             id: e.target.value
@@ -68,7 +69,6 @@ export default  class UpdateRepair extends  Component{
             Description: e.target.value
         });
     }
-   
     onSubmit(e){
         e.preventDefault();
         this.state.status = 'pending';
@@ -88,6 +88,7 @@ export default  class UpdateRepair extends  Component{
     }
 
     render() {
+
         return(
             <div>
             <form onSubmit={this.onSubmitgetDetails}>

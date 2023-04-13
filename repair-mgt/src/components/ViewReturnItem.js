@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import RepaireTableRow from './RepaireTableRow';
+import ReturnTableRow from './ReturnTableRow';
 
-export default  class ViewRepair extends  Component{
+export default  class ViewReturnItem extends  Component{
 
     constructor(props) {
         super(props);
@@ -11,7 +11,7 @@ export default  class ViewRepair extends  Component{
         
 
         this.state = {
-            repaires : [],
+            return : [],
             
         }
        
@@ -19,11 +19,11 @@ export default  class ViewRepair extends  Component{
 
     componentDidMount() {
         //alert('email is ');
-        axios.get('http://localhost:4000/repair/getData/')
+        axios.get('http://localhost:4000/repair/getReturnitem/')
             .then(response => {
                 // alert('Pass una')
                 // alert('Data Tika :'+response.data)
-                this.setState({repaires : response.data});
+                this.setState({return : response.data});
 
             })
             .catch(function (error){
@@ -32,8 +32,8 @@ export default  class ViewRepair extends  Component{
     }
 
     tabRow(){
-        return this.state.repaires.map(function (object, i){
-            return <RepaireTableRow obj = {object} key = {i}/>;
+        return this.state.return.map(function (object, i){
+            return <ReturnTableRow obj = {object} key = {i}/>;
         });
     }
 
@@ -43,20 +43,16 @@ export default  class ViewRepair extends  Component{
         return (
              <div>
                     <br/>
-                    <h1 style={{textAlign:'center'}}>Your Repaire History</h1>
+                    <h1 style={{textAlign:'center'}}>Your Return History</h1>
                     
                     <table className="table table-striped" style = {{marginTop :5,display:'table',marginLeft:'auto',marginRight:'auto'}}>
                             <thead style={{padding:10,textAlign:'center'}}>
                                 <tr>
                                     {/* <th>id</th> */}
-                                    <th style={{padding:20}}>db_ID</th>
-                                    <th style={{padding:20}}>product_ID</th>
-                                    <th style={{padding:20}}>ItemName</th>
-                                    <th style={{padding:20}}>RepairPeriod</th>
-                                    <th style={{padding:20}}>EstimatedCost</th>
-                                    <th style={{padding:20}}>Description</th>
-                                    <th style={{padding:20}}>State</th>
-                                    <th colSpan="2" style={{padding:20}}>Action</th>
+                                    <th style={{padding:20}}>_ID</th>
+                                    <th style={{padding:20}}>Repaire Id</th>
+                                    <th style={{padding:20}}>Warrenty Id</th>
+                                    <th style={{padding:20}}>Note</th>
                                 </tr>
                             </thead>
                             <tbody style={{padding:20,textAlign:'center'}}>

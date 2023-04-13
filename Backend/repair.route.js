@@ -35,7 +35,6 @@ repairRoutes.route('/getData').get(function (req,res){
     });
 });
 
-
 repairRoutes.route('/getData/:id').get(function (req,res){
     let id = req.params.id;
     console.log("get item id : " +id);
@@ -44,17 +43,31 @@ repairRoutes.route('/getData/:id').get(function (req,res){
     });
 });
 
-
 repairRoutes.route('/editRepair/:id').get(function (req,res){
     let id = req.params.id;
+    console.log("get item id : " +id);
     Repairs.findById(id, function (err,repairs){
         res.json(repairs);
     });
 });
 
+
+// repairRoutes.route('/editRepair/:id').get(function (req,res){
+//     let id = req.params.id;
+//     console.log("get item id : " +id);
+//     Repairs.findById({$and:[{HId : id}]},function (err,repair){
+//         if(err)
+//             console.log(err);
+//         else{
+               
+//             res.json(repair)
+//         }
+//     });
+// });
+
 repairRoutes.route('/updateRepair/:id').post(function (req,res){
     let id = req.params.id;
-    //console.log("update id : "+id)
+    console.log("update id : "+id)
     Repairs.findById(id, function (err, repairs){
         if(!repairs)
             res.status(404).send("Data is not found??");
@@ -79,6 +92,33 @@ repairRoutes.route('/deleteRepair/:id').get(function(req,res){
         if(err)res.json(err);
 
         else res.json('Successfully Removed');
+    });
+});
+
+
+repairRoutes.route('/changeRepair/:id').get(function (req,res){
+ 
+    let id = req.params.id;
+    console.log("change status id : "+id)
+    Repairs.findById(id, function (err, repair){
+        if(!repair)
+            res.status(404).send("Data is not found??");
+        else{
+            repair.status = "Done!";
+
+            repair.save().then(repair => {
+                res.json('Update Completed');
+            })
+                .catch(err =>{
+                    res.status(400).send("Unable to update data");
+                });
+        }
+    });
+});
+
+repairRoutes.route('/getReturnItem').get(function (req,res){
+    ReturnItems.find(function (err,repairs){
+        res.json(repairs);
     });
 });
 

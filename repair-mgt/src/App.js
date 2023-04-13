@@ -7,6 +7,7 @@ import ReturnItems  from "./components/ReturnItems";
 import RepairStatus from "./components/RepairStatus";
 import RepairReport from "./components/RepairReport";
 import UpdateRepair  from "./components/UpdateRepair";
+import ViewReturnItem  from "./components/ViewReturnItem";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path ="/add" element={<AddRepair/>}  />
           <Route path ="/editRepaire" element={<UpdateRepair/>}  />
           <Route path ="/return" element={<ReturnItems/>}  />
+          <Route path ="/returnitem" element={<ViewReturnItem/>}  />
           <Route path ="/status" element={<RepairStatus/>}  />
           <Route path ="/report" element={<RepairReport/>}  />
         </Routes>

@@ -60,7 +60,7 @@ export default  class AddRepair extends  Component{
     constructor(props){
         super(props);
 
-        // this.onChangeItemName = this.onChangeFoodName.bind(this);
+        this.onChangeHId = this.onChangeHId.bind(this);
         this.onChangeItemName = this.onChangeItemName.bind(this);
         this.onChangeRepairPeriod = this.onChangeRepairPeriod.bind(this);
         this.onChangeEstimatedCost = this.onChangeEstimatedCost.bind(this);
@@ -68,6 +68,7 @@ export default  class AddRepair extends  Component{
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            HId: '',
             ItemName: '',
             RepairPeriod: '',
             EstimatedCost:'',
@@ -76,6 +77,11 @@ export default  class AddRepair extends  Component{
         }
     }
 
+    onChangeHId(e){
+        this.setState( {
+            HId: e.target.value
+        });
+    }
     onChangeItemName(e){
         this.setState( {
             ItemName: e.target.value
@@ -101,6 +107,7 @@ export default  class AddRepair extends  Component{
         e.preventDefault();
         this.state.status = 'pending';
         const obj = {
+            HId : this.state.HId,
             ItemName : this.state.ItemName,
             RepairPeriod : this.state.RepairPeriod,
             EstimatedCost : this.state.EstimatedCost,
@@ -112,6 +119,7 @@ export default  class AddRepair extends  Component{
                                 .then(res => {
                                     alert("Item added Successfully");
                                     this.setState({
+                                        HId: '',
                                         ItemName: '',
                                         RepairPeriod: '',
                                         EstimatedCost:'',
@@ -138,8 +146,8 @@ export default  class AddRepair extends  Component{
                 marginRight={"auto"}
                 marginTop={10}
             >
-                    {/* <FormLabel> RepairID</FormLabel>
-                    <TextField value={RepairID} margin="normal" fullWidth variant ="outlined" name="repairID"/> */}
+                    <FormLabel> RepairID</FormLabel>
+                    <TextField value={this.state.HId} onChange={this.onChangeHId} margin="normal" fullWidth variant ="outlined" name="repairID"/>
                     <FormLabel> Item Name</FormLabel>
                     <TextField value={this.state.ItemName} onChange={this.onChangeItemName}margin="normal" fullWidth variant ="outlined" name="itemName"/>
                     <FormLabel> Repair Period</FormLabel>
@@ -149,7 +157,7 @@ export default  class AddRepair extends  Component{
                     <FormLabel>Description</FormLabel>
                     <TextField value={this.state.Description} onChange={this.onChangeDescription}margin="normal" fullWidth variant ="outlined" name="Description"/>
             
-                    {/* <FormControlLabel control={<Checkbox Checked={inputs.alldetailsarecorrect} />} label="All details are correct"/> */}
+                    
                     <Button variant ="contained" type ="submit">Add Repair</Button>
                     </Box>
                 </form>

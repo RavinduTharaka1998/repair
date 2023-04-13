@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 
 Repairs = new Schema({
+    HId: {
+        type: String
+    },
     ItemName: {
         type: String
     },

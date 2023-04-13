@@ -9,8 +9,8 @@ const Header = () => {
         <AppBar sx={{backGroundColor: "#232F3D"}} position= "sticky">
         <Toolbar>
        
-                  <Typography>
-                     <ConstructionIcon/><br></br>
+                  <Typography style={{fontSize:40}}>
+                     <ConstructionIcon style={{fontSize:30,marginRight:20}}/>
                      Repair Management
                   </Typography>
         </Toolbar>
@@ -26,6 +26,7 @@ const Header = () => {
                 <Tab LinkComponent={NavLink} to ="/view"label="View Repairs" />
                 <Tab LinkComponent={NavLink} to ="/add"label="Add Repairs" />
                 <Tab LinkComponent={NavLink} to ="/return"label="Return Items" />
+                <Tab LinkComponent={NavLink} to ="/returnitem"label="View Return Items" />
                <Tab LinkComponent={NavLink} to ="/status"label="Repair Status" />
                <Tab LinkComponent={NavLink} to ="/report"label="Repair Report" />
             
