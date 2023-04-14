@@ -18,7 +18,7 @@ class TableRow extends Component {
         window.location.replace('/view');
     }
     status(){
-        alert("Change calling")
+        //alert("Change calling")
         axios.get('http://localhost:4000/repair/changeRepair/'+this.props.obj._id)
             .then(this.setState({redirect: true}))
             .catch(err => console.log(err))

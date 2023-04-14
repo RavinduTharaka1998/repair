@@ -5,8 +5,8 @@ import axios from 'axios';
 
 export default  class UpdateRepair extends  Component{
 
+
     constructor(props){
-        
         super(props);
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeItemName = this.onChangeItemName.bind(this);
@@ -14,7 +14,7 @@ export default  class UpdateRepair extends  Component{
         this.onChangeEstimatedCost = this.onChangeEstimatedCost.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        
+        this.onSubmitgetDetails = this.onSubmitgetDetails.bind(this);
 
         this.state = {
             id:'',
@@ -22,14 +22,13 @@ export default  class UpdateRepair extends  Component{
             RepairPeriod: '',
             EstimatedCost:'',
             Description:'',
-            status:''
+            state: ''
         }
        
     }
     
     onSubmitgetDetails(e) {
         e.preventDefault();
-        alert("your Id : ");
         axios.get('http://localhost:4000/repair/editRepair/'+this.state.id)
             .then(res => {
                 this.setState({
@@ -43,7 +42,8 @@ export default  class UpdateRepair extends  Component{
                 console.log("Can't Get Data");
             })
     }
-    
+
+
     onChangeId(e){
         this.setState( {
             id: e.target.value
@@ -69,9 +69,11 @@ export default  class UpdateRepair extends  Component{
             Description: e.target.value
         });
     }
+   
     onSubmit(e){
         e.preventDefault();
         this.state.status = 'pending';
+        alert("status : "+this.state.status);
         const obj = {
             ItemName : this.state.ItemName,
             RepairPeriod : this.state.RepairPeriod,
@@ -88,7 +90,6 @@ export default  class UpdateRepair extends  Component{
     }
 
     render() {
-
         return(
             <div>
             <form onSubmit={this.onSubmitgetDetails}>
@@ -106,6 +107,7 @@ export default  class UpdateRepair extends  Component{
                     
                     <FormLabel>Enter Id</FormLabel>
                     <TextField value={this.state.id} onChange={this.onChangeId}margin="normal" fullWidth variant ="outlined" name="id"/>
+                    
             
                     <Button variant ="contained" type ="submit">Get Details</Button>
                     </Box>

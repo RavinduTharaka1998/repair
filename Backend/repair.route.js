@@ -38,37 +38,37 @@ repairRoutes.route('/getData').get(function (req,res){
 repairRoutes.route('/getData/:id').get(function (req,res){
     let id = req.params.id;
     console.log("get item id : " +id);
-    Repairs.findById(id, function (err,repairs){
+    Repairs.findOne({$and:[{HId : id}]},function (err,repairs){
         res.json(repairs);
     });
 });
-
-repairRoutes.route('/editRepair/:id').get(function (req,res){
-    let id = req.params.id;
-    console.log("get item id : " +id);
-    Repairs.findById(id, function (err,repairs){
-        res.json(repairs);
-    });
-});
-
 
 // repairRoutes.route('/editRepair/:id').get(function (req,res){
 //     let id = req.params.id;
-//     console.log("get item id : " +id);
-//     Repairs.findById({$and:[{HId : id}]},function (err,repair){
-//         if(err)
-//             console.log(err);
-//         else{
-               
-//             res.json(repair)
-//         }
+//     console.log("edit item id : " +id);
+//     Repairs.findById(id, function (err,repairs){
+//         res.json(repairs);
 //     });
 // });
+
+
+repairRoutes.route('/editRepair/:id').get(function (req,res){
+    let id = req.params.id;
+    console.log("edit item id : " +id);
+    Repairs.findOne({$and:[{HId : id}]},function (err,repair){
+        if(err)
+            console.log(err);
+        else{
+               
+            res.json(repair)
+        }
+    });
+});
 
 repairRoutes.route('/updateRepair/:id').post(function (req,res){
     let id = req.params.id;
     console.log("update id : "+id)
-    Repairs.findById(id, function (err, repairs){
+    Repairs.findOne({$and:[{HId : id}]},function (err,repairs){
         if(!repairs)
             res.status(404).send("Data is not found??");
         else{
@@ -76,6 +76,7 @@ repairRoutes.route('/updateRepair/:id').post(function (req,res){
             repairs.RepairPeriod = req.body.RepairPeriod;
             repairs.EstimatedCost = req.body.EstimatedCost;
             repairs.Description = req.body.Description;
+            repairs.status = "pedding";
 
             repairs.save().then(repairs => {
                 res.json('Update Complete');
