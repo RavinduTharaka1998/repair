@@ -105,7 +105,7 @@ repairRoutes.route('/changeRepair/:id').get(function (req,res){
         if(!repair)
             res.status(404).send("Data is not found??");
         else{
-            repair.status = "Done!";
+            repair.status = "Done";
 
             repair.save().then(repair => {
                 res.json('Update Completed');
@@ -122,5 +122,15 @@ repairRoutes.route('/getReturnItem').get(function (req,res){
         res.json(repairs);
     });
 });
+
+repairRoutes.route('/getReportData/:id').get(function (req,res){
+    let id = req.params.id;
+    console.log("get Report item id : " +id);
+
+    Repairs.find({$or:[{HId: id},{ItemName: id},{RepairPeriod: id},{EstimatedCost: id}]},function (err,repairs){ 
+        res.json(repairs);
+    });
+});
+
 
 module.exports = repairRoutes;

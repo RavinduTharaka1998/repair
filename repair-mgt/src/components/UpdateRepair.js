@@ -73,7 +73,7 @@ export default  class UpdateRepair extends  Component{
     onSubmit(e){
         e.preventDefault();
         this.state.status = 'pending';
-        alert("status : "+this.state.status);
+        //alert("status : "+this.state.status);
         const obj = {
             ItemName : this.state.ItemName,
             RepairPeriod : this.state.RepairPeriod,

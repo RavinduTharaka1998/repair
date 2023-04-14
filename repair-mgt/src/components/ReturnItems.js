@@ -56,7 +56,7 @@ export default  class Returnitem extends  Component{
                             
                                     })
                                     console.log(res.data)});
-                                    window.location.replace('/view');
+                                    window.location.replace('/returnitem');
     }
 
     render() {
